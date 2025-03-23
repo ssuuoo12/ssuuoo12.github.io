@@ -2,10 +2,10 @@
 title: Not Pure Poole
 description: 개발 블로그
 url: https://ssuuoo12.github.io
-avatar: /44.jpeg
+avatar: /l.jpg
 paginate: 5
 permalink: pretty
-cover_image: /prairie.jpeg
+cover_image: /prairie.png
 
 # Gems
 plugins:
