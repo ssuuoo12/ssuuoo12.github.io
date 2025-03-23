@@ -1,1 +1,0 @@
-# ssuuoo12.github.io
