@@ -1,0 +1,16 @@
+[33m33302cd[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit: 정리된 커밋 메시지
+[33mc03df15[m HEAD@{1}: reset: moving to HEAD~3
+[33m4e0d96b[m HEAD@{2}: reset: moving to HEAD@{1}
+[33mc03df15[m HEAD@{3}: reset: moving to HEAD~3
+[33m4e0d96b[m HEAD@{4}: commit: rename
+[33mb1e9879[m HEAD@{5}: commit: cm3
+[33mcfc34fd[m HEAD@{6}: commit: 커밋2
+[33mc03df15[m HEAD@{7}: commit: dd
+[33m398ce71[m HEAD@{8}: commit: dd
+[33mc71eaaa[m HEAD@{9}: commit: Remove 44.png, add l.jpg, and update _config.yml
+[33m1121317[m HEAD@{10}: commit: 2nd cm
+[33m0847dd8[m HEAD@{11}: commit: 1st commit
+[33m4088174[m HEAD@{12}: commit: Update Jekyll theme files
+[33m24b0de6[m HEAD@{13}: reset: moving to origin/main
+[33m1a2b942[m HEAD@{14}: Branch: renamed refs/heads/master to refs/heads/main
+[33m1a2b942[m HEAD@{16}: commit (initial): Initial commit with Jekyll theme

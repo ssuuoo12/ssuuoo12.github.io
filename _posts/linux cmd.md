@@ -6,7 +6,7 @@ last_modified_at: 2025-03-30 01:08:25 +0800
 tags: [linux, command]
 toc:  true
 ---
-리눅스 기본 **명령어** 
+<!-- 리눅스 기본 **명령어** 
 {: .message }
 
 - <mark>기본 명령어어</mark>
@@ -78,4 +78,4 @@ toc:  true
   예: man ls (ls 사용법 확인).
 - clear: 터미널 화면 지우기.
 - history: 이전에 입력한 명령어 목록 보기.
-{% endhighlight %}
+{% endhighlight %} -->
