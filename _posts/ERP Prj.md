@@ -1,0 +1,34 @@
+---
+layout: post
+title: LSTM 과제(딥러닝)
+date: 2025-02-26 23:18 +0800
+last_modified_at: 2025-02-26 01:08:25 +0800
+tags: [jekyll theme, jekyll, tutorial]
+toc:  true
+---
+풀스택 파이널 **ERP 프로젝트** 
+{: .message }
+
+## 풀스택 과정 파이널 프로젝트
+커피관련 회사의 ERP 시스템을 구축중에서 근태관리와 급여관리를 담당하였습니다다
+
+슬라이드 링크 : (https://docs.google.com/presentation/d/1e_4T_wU4pqAiIaU78E76P5cY1PbcHTsW/edit#slide=id.p1).
+
+### 개요
+- 기간 : 2025-01-24~2025-02-25
+- 인원 : 5명
+> 본 프로젝트는 국비지원 훈련과정 중 진행한 파이널 팀 프로젝트입니다. 
+> 근태관리, 급여관리를 맡게 되었습니다
+> 출결관리, 연차 및 재택 신청, 사용 현황 시각화화 및 페이지 구현
+> Spring에 대한 이해 및 숙련도 향상, vUE 사용경험을 위한 팀 프로젝트 진행(FE/BE)
+
+> Overview
+
+[근태 관리](./출결 근태.png "출결 관리")
+[근태 관리](./출결 현황.png "출결 현환 확인")
+[연차 관리](./연차 초기화.png "연차 초기화")
+[연차 관리](./연차 초기화 후의 그래프.png "연차 초기화 후의 그래프")
+[급여 관리](./급여여.png "직원별 급여내역서 출력")
+
+ <a href="https://docs.google.com/presentation/d/1e_4T_wU4pqAiIaU78E76P5cY1PbcHTsW/edit#slide=id.p1"></a>
+

@@ -1,0 +1,81 @@
+---
+layout: post
+title: 리눅스 명령어어
+date: 2025-03-30 23:18 +0800
+last_modified_at: 2025-03-30 01:08:25 +0800
+tags: [linux, command]
+toc:  true
+---
+리눅스 기본 **명령어** 
+{: .message }
+
+- <mark>기본 명령어어</mark>
+1. 파일 및 디렉토리 관리
+{% highlight text %}
+
+- ls: 디렉토리 내 파일 목록 보기 (윈도우의 dir 비슷).
+  예: ls -l (자세히), ls -a (숨김 파일 포함).
+- cd: 디렉토리 이동.
+  예: cd /home (홈 디렉토리로 이동), cd .. (상위 디렉토리로 이동).
+- pwd: 현재 디렉토리 경로 확인.
+  예: /home/user.
+- mkdir: 새 디렉토리 생성.
+  예: mkdir test (test라는 폴더 생성).
+- rm: 파일이나 디렉토리 삭제.
+  예: rm file.txt (파일 삭제), rm -rf test (폴더 강제 삭제).
+- cp: 파일/디렉토리 복사.
+  예: cp file.txt /home (file.txt를 /home으로 복사).
+- mv: 파일/디렉토리 이동 또는 이름 변경.
+  예: mv file.txt /home (이동), mv file.txt new.txt (이름 변경).
+{% endhighlight %}
+
+2. 파일 내용 확인
+{% highlight text %}
+- cat: 파일 내용 출력.
+  예: cat file.txt.
+- less: 파일 내용을 페이지 단위로 보기 (긴 파일 유용).
+  예: less file.txt (q로 종료).
+- head: 파일의 처음 10줄 보기.
+  예: head file.txt.
+- tail: 파일의 마지막 10줄 보기.
+  예: tail file.txt.
+{% endhighlight %}
+
+3. 권한 및 소유자 관리
+{% highlight text %}
+- chmod: 파일/디렉토리 권한 변경.
+  예: chmod 777 file.txt (모두에게 풀 권한).
+- chown: 파일 소유자 변경.
+  예: chown user file.txt (user에게 소유권 부여).
+- ls -l: 파일 권한과 소유자 확인.
+{% endhighlight %}
+
+4. 시스템 정보 확인
+{% highlight text %}
+- whoami: 현재 로그인한 사용자 이름 확인.
+- uname: 시스템 정보 확인.
+  예: uname -a (전체 정보).
+- df -h: 디스크 사용량 확인 (용량 단위 사람이 읽기 쉽게).
+- free -h: 메모리 사용량 확인.
+{% endhighlight %}
+
+5. 프로세스 및 네트워크
+{% highlight text %}
+- ps: 실행 중인 프로세스 확인.
+  예: ps aux (모든 프로세스 자세히).
+- kill: 프로세스 종료.
+  예: kill 1234 (PID 1234인 프로세스 종료).
+- ping: 네트워크 연결 테스트.
+  예: ping google.com.
+- netstat: 네트워크 상태 확인 (옵션에 따라 다름).
+{% endhighlight %}
+
+6. 기타
+{% highlight text %}
+- sudo: 관리자 권한으로 명령 실행.
+  예: sudo apt update (패키지 업데이트).
+- man: 명령어 매뉴얼 보기.
+  예: man ls (ls 사용법 확인).
+- clear: 터미널 화면 지우기.
+- history: 이전에 입력한 명령어 목록 보기.
+{% endhighlight %}

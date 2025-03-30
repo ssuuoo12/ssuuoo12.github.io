@@ -1,0 +1,122 @@
+---
+layout: post
+title: LSTM 과제(딥러닝)
+date: 2025-03-21 23:18 +0800
+last_modified_at: 2025-03-21 01:08:25 +0800
+tags: [jekyll theme, jekyll, tutorial]
+toc:  true
+---
+LSTM  **딥러닝** 시계열 데이터 과제
+{: .message }
+
+## seoul_pm10 미세먼지 예측 과제
+코랩 dataset 폴더에 있는 seoul_pm10.csv 파일을 다운 받고, 강남구 pm10에 대한 실제값과 예측값을 시각화하여 비교하세요.
+
+1. 데이터 로드 : "dataset/seoul_pm10.csv"   ==> encoding='cp949' 유의
+2. 날짜 변환 및 결측치 처리 : to_datetime
+3. 서울 지역별 원핫 인코딩
+4. LSTM 모델에 적합한 시퀀스 데이터셋 함수 생성
+5. 데이터셋 분리 (학습 데이터, 테스트 데이터)
+6. LSTM 모델 생성
+7. 모델 컴파일 및 학습
+8. 예측 결과 시각화
+
+## Code
+{% highlight js %}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+
+// 1. 데이터 수집
+file_path = "./sample_data/seoul_pm10.csv"  # 데이터 파일 경로
+df = pd.read_csv(file_path, encoding='cp949')
+
+// df.head()
+
+df['date'] = pd.to_datetime(df['date'])
+df.set_index('date', inplace=True)
+
+// 결측치 처리
+df['pm10'] = df['pm10'].fillna(df['pm10'].mean())
+df['pm2.5'] = df['pm2.5'].fillna(df['pm2.5'].mean())
+
+// 지역 원-핫 인코딩
+df_encoded = pd.get_dummies(df, columns=['area'], prefix='area')
+
+// 강남구 데이터만 필터링
+df_gangnam = df_encoded[df_encoded['area_강남구'] == 1].copy()
+
+// 2. 데이터 전처리
+scaler = MinMaxScaler(feature_range=(0, 1))
+scaled_data = scaler.fit_transform(df_gangnam[['pm10']])
+
+def create_dataset(dataset, look_back=60):
+    X, y = [], []
+    for i in range(len(dataset) - look_back):
+        X.append(dataset[i:i + look_back, 0])
+        y.append(dataset[i + look_back, 0])
+    return np.array(X), np.array(y)
+
+look_back = 60  # 과거 60일 데이터로 예측
+X, y = create_dataset(scaled_data, look_back)
+X = np.reshape(X, (X.shape[0], X.shape[1], 1))  # LSTM 입력 형태
+
+// 3. 모델 구성
+model = Sequential([
+    LSTM(50, return_sequences=True, input_shape=(X.shape[1], 1)),
+    LSTM(50),
+    Dense(1)
+])
+
+model.compile(optimizer='adam', loss='mean_squared_error')
+
+// 4. 모델 학습
+train_size = int(len(X) * 0.8)
+X_train, X_test = X[:train_size], X[train_size:]
+y_train, y_test = y[:train_size], y[train_size:]
+
+model.fit(X_train, y_train, epochs=20, batch_size=32, validation_data=(X_test, y_test))
+
+// 5. 예측 및 시각화
+predictions = model.predict(X_test)
+predictions = scaler.inverse_transform(predictions.reshape(-1, 1))
+
+// 실제 값 복원
+actual_pm10 = scaler.inverse_transform(y_test.reshape(-1, 1))
+
+// 시각화
+plt.figure(figsize=(14, 5))
+plt.plot(actual_pm10, label="Actual Pm10", color='blue')
+plt.plot(predictions, label="Predicted Pm10", color='red')
+plt.title(f'Gangnam Pm10 Predicted')
+plt.xlabel('Days')
+plt.ylabel('Pm10')
+plt.legend()
+plt.show()
+{% endhighlight %}
+
+
+### 설명
+1. 데이터 수집
+- pd.read_csv(file_path, encoding='cp949'): CSV 파일을 읽어 데이터프레임 생성.
+- df['date'] = pd.to_datetime(df['date']): 날짜 열을 datetime 형식으로 변환.
+- df.set_index('date', inplace=True): 날짜를 데이터프레임 인덱스로 설정.
+- df['pm10'].fillna(df['pm10'].mean()): PM10 결측치를 평균으로 채움.
+- df['pm2.5'].fillna(df['pm2.5'].mean()): PM2.5 결측치를 평균으로 채움.
+- pd.get_dummies(df, columns=['area']): 지역 열을 원-핫 인코딩.
+- df_gangnam = df_encoded[df_encoded['area_강남구'] == 1]: 강남구 데이터만 필터링.
+2. 데이터 전처리
+- scaler = MinMaxScaler(feature_range=(0, 1)): 0~1로 스케일링하는 객체 생성.
+- scaled_data = scaler.fit_transform(df_gangnam[['pm10']]): PM10 데이터를 스케일링.
+- def create_dataset(dataset, look_back=60): 60일 데이터를 사용해 X, y 생성 함수 정의.
+- X, y = create_dataset(scaled_data, look_back): 스케일링된 데이터로 X, y 생성.
+- X = np.reshape(X, (X.shape[0], X.shape[1], 1)): LSTM 입력 형태로 데이터 재구성.
+3. 모델 구성
+- model = Sequential(): 순차적 모델 초기화.
+- LSTM(50, return_sequences=True, input_shape=(X.shape[1], 1)): 첫 번째 LSTM 레이어.
+- LSTM(50): 두 번째 LSTM 레이어.
+- Dense(1): 출력 레이어.
+- model.compile(optimizer='adam', loss='mean_squared_error'): 모델 컴파일.
