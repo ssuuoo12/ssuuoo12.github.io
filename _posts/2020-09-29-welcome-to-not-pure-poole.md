@@ -49,7 +49,7 @@ You can place the footnoted content wherever you like. Markdown parsers should p
  -->
 
 
-### Code
+## Code
 
 <!-- Inline code is available with the `<code>` element. Snippets of multiple lines of code are supported through Rouge. Longer lines will automatically scroll horizontally when needed. You may also use code fencing (triple backticks) for rendering code. -->
 
@@ -78,6 +78,17 @@ adder(2, 6);
 {% endhighlight %}
 
 Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa. -->
+### seoul_pm10 미세먼지 예측 과제
+코랩 dataset 폴더에 있는 seoul_pm10.csv 파일을 다운 받고, 강남구 pm10에 대한 실제값과 예측값을 시각화하여 비교하세요.
+
+1. 데이터 로드 : "dataset/seoul_pm10.csv"   ==> encoding='cp949' 유의
+2. 날짜 변환 및 결측치 처리 : to_datetime
+3. 서울 지역별 원핫 인코딩
+4. LSTM 모델에 적합한 시퀀스 데이터셋 함수 생성
+5. 데이터셋 분리 (학습 데이터, 테스트 데이터)
+6. LSTM 모델 생성
+7. 모델 컴파일 및 학습
+8. 예측 결과 시각화
 
 {% highlight js %}
 
@@ -89,26 +100,26 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 
-# 1. 데이터 수집
+// 1. 데이터 수집
 file_path = "./sample_data/seoul_pm10.csv"  # 데이터 파일 경로
 df = pd.read_csv(file_path, encoding='cp949')
 
-# df.head()
+// df.head()
 
 df['date'] = pd.to_datetime(df['date'])
 df.set_index('date', inplace=True)
 
-# 결측치 처리
+// 결측치 처리
 df['pm10'] = df['pm10'].fillna(df['pm10'].mean())
 df['pm2.5'] = df['pm2.5'].fillna(df['pm2.5'].mean())
 
-# 지역 원-핫 인코딩
+// 지역 원-핫 인코딩
 df_encoded = pd.get_dummies(df, columns=['area'], prefix='area')
 
-# 강남구 데이터만 필터링
+// 강남구 데이터만 필터링
 df_gangnam = df_encoded[df_encoded['area_강남구'] == 1].copy()
 
-# 2. 데이터 전처리
+// 2. 데이터 전처리
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_data = scaler.fit_transform(df_gangnam[['pm10']])
 
@@ -123,7 +134,7 @@ look_back = 60  # 과거 60일 데이터로 예측
 X, y = create_dataset(scaled_data, look_back)
 X = np.reshape(X, (X.shape[0], X.shape[1], 1))  # LSTM 입력 형태
 
-# 3. 모델 구성
+// 3. 모델 구성
 model = Sequential([
     LSTM(50, return_sequences=True, input_shape=(X.shape[1], 1)),
     LSTM(50),
@@ -132,21 +143,21 @@ model = Sequential([
 
 model.compile(optimizer='adam', loss='mean_squared_error')
 
-# 4. 모델 학습
+// 4. 모델 학습
 train_size = int(len(X) * 0.8)
 X_train, X_test = X[:train_size], X[train_size:]
 y_train, y_test = y[:train_size], y[train_size:]
 
 model.fit(X_train, y_train, epochs=20, batch_size=32, validation_data=(X_test, y_test))
 
-# 5. 예측 및 시각화
+// 5. 예측 및 시각화
 predictions = model.predict(X_test)
 predictions = scaler.inverse_transform(predictions.reshape(-1, 1))
 
-# 실제 값 복원
+// 실제 값 복원
 actual_pm10 = scaler.inverse_transform(y_test.reshape(-1, 1))
 
-# 시각화
+// 시각화
 plt.figure(figsize=(14, 5))
 plt.plot(actual_pm10, label="Actual Pm10", color='blue')
 plt.plot(predictions, label="Predicted Pm10", color='red')
