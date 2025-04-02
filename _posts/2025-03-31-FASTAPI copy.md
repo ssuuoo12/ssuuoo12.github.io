@@ -2,7 +2,7 @@
 layout: post
 title: FASTAPI(챗봇기반)
 date: 2025-03-31 23:18 +0800
-last_modified_at: 2025-03-31 01:08:25 +0800
+last_modified_at: 2025-03-31 23:2023:20 +0800
 tags: [chatbot, python, FastAPI]
 toc:  true
 ---
