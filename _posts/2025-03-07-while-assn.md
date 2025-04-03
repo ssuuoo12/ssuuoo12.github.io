@@ -3,7 +3,7 @@ layout: post
 title: while사용 과제
 date: 2025-03-10 23:18 +0800
 last_modified_at: 2025-03-10 23:20 +0800
-tags: [python]
+tags: [python, assn]
 toc:  true
 ---
 **while문** 사용하여 사칙계산기
