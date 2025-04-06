@@ -1,13 +1,23 @@
 ---
 layout: post
-title: FASTAPI(챗봇기반)
+title: FASTAPI(LLM기반) (1)
 date: 2025-03-31 23:18 +0800
 last_modified_at: 2025-03-31 23:20 +0800
-tags: [chatbot, python, FastAPI]
+tags: [LLM, python, FastAPI]
 toc:  true
 ---
-**FASTAPI** 챗봇 기반 예제
+**FASTAPI** LLM 기반 핵심봇 - Text Summrization
 {: .message }
+
+
+{% highlight text %}
+허깅페이스의 Text Summarization하는 "lcw99/t5-base-korean-text-summary"라는 모델을
+지정하여 사용하였다.
+이 핵심봇은 텍스트를 요약해주는 챗봇으로, FastAPI를 활용한 파이썬 코드로 작성되었습니다. 
+main.py, service.py, schema.py, router.py 파일로 구성되어 있습니다. 아래는 코드와 
+설명입니다.
+{% endhighlight %}
+
 
 1. main.py : 
 {% highlight text %}
