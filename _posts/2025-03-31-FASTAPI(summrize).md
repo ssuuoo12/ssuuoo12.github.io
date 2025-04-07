@@ -9,6 +9,8 @@ toc:  true
 **FASTAPI** LLM 기반 핵심봇 - Text Summrization
 {: .message }
 
+[깃허브 소스 보러가기](https://github.com/ssuuoo12/LLM-Fastapi-summri)
+
 
 {% highlight text %}
 허깅페이스의 Text Summarization하는 "lcw99/t5-base-korean-text-summary"라는 모델을
