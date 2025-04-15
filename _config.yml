@@ -35,8 +35,8 @@ logo: logo.png
 social:
   name: Songzi Vong
   links:
-    - https://twitter.com/vszhub
-    - https://github.com/ssuuoo12
+    # - https://twitter.com/vszhub
+     - https://github.com/ssuuoo12
 google_site_verification: xxxxx
 lang: ko
 
@@ -54,6 +54,6 @@ sass:
 
 # Specify the author for blog posts
 author:
-  name: Songzi Vong
+  name: Song
   url: https://github.com/ssuuoo12/
-  email: vszhub@gmail.com
+  email: ssszzy333@gmail.com
