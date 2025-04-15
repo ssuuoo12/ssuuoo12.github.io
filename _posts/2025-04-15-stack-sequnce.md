@@ -46,6 +46,7 @@ peek()는 스택의 맨 위 요소를 제거하지 않고 값만 반환
 
 ### 풀이
 {% highlight js %}
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -67,7 +68,8 @@ public class Stack_Sequence_1874 {
 	        Stack<Integer> stack = new Stack<>();
 	        int current = 1; // 스택에 넣을 다음 숫자(오름차순으로 push)
 	        
-	        // 수열 생성 가능 여부 체크 변수
+          // 코드에서는 처음에 isPossible을 true로 초기화하고(즉, "만들 수 있다"고 가정)
+          // 불가능한 상황을 발견하면 false로 변경
 	        boolean isPossible = true;
 	        
 	        // n개의 숫자에 대해 반복
